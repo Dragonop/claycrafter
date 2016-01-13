@@ -53,4 +53,7 @@ minetest.register_craft({
 		type = "shapeless",
 		output = "default:clay 4",
 		recipe = {"claycrafter:compressed_dirt", "claycrafter:glass_of_water"},
+		replacements = {
+				{"claycrafter:glass_of_water", "vessels:drinking_glass"},
+		}
 })
