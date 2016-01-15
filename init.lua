@@ -13,7 +13,6 @@ minetest.register_craft({
 		}
 })
 
-
 --Glass of water
 minetest.register_craftitem("claycrafter:glass_of_water", {
 		description = "Glass of Water",
