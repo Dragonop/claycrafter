@@ -7,7 +7,6 @@ Dependencies:
 -Bucket
 
 License for Code
-----------------
 
 Copyright (C) 2010-2013 Dragonop <joaco-mono@hotmail.com>
 
@@ -26,6 +25,5 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 License for Textures, Models and Sounds
----------------------------------------
 
 CC-BY-SA 3.0 UNPORTED. Created by Dragonop
