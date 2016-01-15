@@ -1,3 +1,19 @@
+--the claycrafter is supposed to be some sort of furnace
+--that uses compressed dirt and glasses of water to make clay, it's not needed to use the mod currently.
+ 
+minetest.register_node("claycrafter:claycrafter", {
+		description = "Clay crafter",
+		tiles = {
+				"claycrafter_claycrafter_up.png",
+				"claycrafter_claycrafter_down.png",
+				"claycrafter_claycrafter_side.png",
+				"claycrafter_claycrafter_side.png",
+				"claycrafter_claycrafter_back.png",
+				"claycrafter_claycrafter_front.png",
+				},
+		groups = {oddly_breakable_by_hand = 1, choppy = 1}
+})
+
 --Compressed dirt
 minetest.register_node("claycrafter:compressed_dirt", {
 		description = "Compressed Dirt",
