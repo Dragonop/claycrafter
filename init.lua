@@ -25,7 +25,7 @@ minetest.register_craft({
 minetest.register_craftitem("claycrafter:glass_of_water", {
 		description = "Glass of Water",
 		inventory_image = "claycrafter_glass_of_water.png",
-		groups = {h2o = 1}, -- How much compressed dirt will turn to clay
+		groups = {h2o = 4}, -- How much compressed dirt will turn to clay
 		--stack_max = 1
 })
 
@@ -44,7 +44,8 @@ minetest.register_craft({
 		}
 })
 
---Craft the clay
+--Craft the claya
+--[[
 minetest.register_craft({
 		type = "shapeless",
 		output = "default:clay 4",
@@ -53,6 +54,7 @@ minetest.register_craft({
 			{"claycrafter:glass_of_water", "vessels:drinking_glass"},
 		}
 })
+--]]
 
 -- Keeping this here for reference
 -- As there are two ways a regular furnace gets fuel time

@@ -209,13 +209,13 @@ minetest.register_abm({
 		--]]
 		local cooked, aftercooked
 		local cooktime = minetest.get_item_group(inv:get_stack("fuel", 1):get_name(), "h2o")
-		print("cooktime: " .. cooktime)
+		--print("cooktime: " .. cooktime)
 		local cookable = true
-		print(inv:get_stack("src", 1):get_name())
+		--print(inv:get_stack("src", 1):get_name())
 		if inv:get_stack("src", 1):get_name() ~= "claycrafter:compressed_dirt" then
 			cookable = false
 		end
-		print(tostring(cookable))
+		--print(tostring(cookable))
 		
 		
 		-- Check if we have enough fuel to burn
@@ -226,12 +226,13 @@ minetest.register_abm({
 			-- If there is a cookable item then check if it is ready yet
 			if cookable then
 				src_time = src_time + 1
-				print("src_time: " .. src_time)
+				--print("src_time: " .. src_time)
 				if src_time >= cooktime then --cooked.time then
 					-- Place result in dst list if possible
 					--if inv:room_for_item("dst", ItemStack({name = "default:clay 4"})) then --cooked.item) then
-						inv:add_item("dst", {name = "default:clay"}) --cooked.item)
+						inv:add_item("dst", {name = "default:clay", count = 4}) --cooked.item)
 						--inv:set_stack("src", 1, aftercooked.items[1])
+						inv:remove_item("src", inv:get_stack("src", 1):get_name())
 						src_time = 0
 					--end
 				end
@@ -240,9 +241,9 @@ minetest.register_abm({
 			-- Furnace ran out of fuel
 			if cookable then
 				-- We need to get new fuel
-				local fuel, afterfuel = minetest.get_craft_result({method = "fuel", width = 1, items = fuellist})
+				--local fuel, afterfuel = minetest.get_craft_result({method = "fuel", width = 1, items = fuellist})
 				local fueltime = minetest.get_item_group(inv:get_stack("fuel", 1):get_name(), "h2o")
-				print("fueltime var is: " .. fueltime)
+				--print("fueltime var is: " .. fueltime)
 				
 				--if fuel.time == 0 then
 				if fueltime == 0 then
@@ -252,8 +253,14 @@ minetest.register_abm({
 					src_time = 0
 				else
 					-- Take fuel from fuel list
+
+					inv:remove_item("fuel", inv:get_stack("fuel", 1):get_name())
+					inv:add_item("fuel", inv:add_item("dst", {name = "vessels:drinking_glass"}))
+
 					--inv:set_stack("fuel", 1, afterfuel.items[1])
-					inv:get_stack("fuel", 1):take_item()
+					--inv:add_item("fuel", 1, ItemStack({name = "vessels:drinking_glass"}))
+					--print("rund out?")
+					--inv:get_stack("fuel", 1):take_item()
 					
 					
 					fuel_totaltime = fueltime
