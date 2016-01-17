@@ -5,8 +5,8 @@
 minetest.register_node("claycrafter:claycrafter", {
 		description = "Clay crafter",
 		tiles = {
-				"claycrafter_claycrafter_up.png",
-				"claycrafter_claycrafter_down.png",
+				"claycrafter_claycrafter_top.png",
+				"claycrafter_claycrafter_bottom.png",
 				"claycrafter_claycrafter_side.png",
 				"claycrafter_claycrafter_side.png",
 				"claycrafter_claycrafter_back.png",
