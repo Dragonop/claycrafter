@@ -6,6 +6,9 @@ Dependencies:
 -Vessels
 -Bucket
 
+claycrafter.lua is derivated from furnace.lua (minetest_game) by PilzAdam and Amaz1. 
+Edited by everamzah to work for this mod.
+
 #####License for Code
 
 Copyright (C) 2010-2013 Dragonop <joaco-mono@hotmail.com>
