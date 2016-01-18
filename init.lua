@@ -44,7 +44,16 @@ minetest.register_craft({
 		}
 })
 
---Craft the claya
+minetest.register_craft({
+		output = "claycrafter:claycrafter",
+		recipe = {
+			{"group:wood", "default:steel_ingot", "group:wood"},
+			{"group:wood", "default:glass", "group:wood"},
+			{"default:stick", "bucket:bucket_water", "default:stick"},
+		}
+})
+
+--Craft the clay
 --[[
 minetest.register_craft({
 		type = "shapeless",
