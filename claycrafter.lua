@@ -208,7 +208,7 @@ minetest.register_abm({
 				src_time = src_time + 1
 				if src_time >= cooktime then
 					-- Place result in dst list if possible
-					if inv:room_for_item("dst", ItemStack({name = "default:clay", count = 4})) then
+					if inv:room_for_item("dst", ItemStack({name = "default:clay", count = 4}) and ItemStack({name = "vessels:drinking_glass"})) then
 						print("Apparently, there's room.")
 						inv:add_item("dst", {name = "default:clay", count = 4})
 						inv:remove_item("src", inv:get_stack("src", 1):get_name())
@@ -230,7 +230,7 @@ minetest.register_abm({
 				else
 					-- Take fuel from fuel list
 
-					if inv:room_for_item("dst", ItemStack({name = "vessels:drinking_glass"})) then
+					if inv:room_for_item("dst", ItemStack({name = "vessels:drinking_glass"}) and ItemStack({name = "default:clay"})) then
 						inv:remove_item("fuel", inv:get_stack("fuel", 1):get_name())
 						inv:add_item("dst", {name = "vessels:drinking_glass"})
 					end
@@ -279,7 +279,7 @@ minetest.register_abm({
 			swap_node(pos, "claycrafter:claycrafter")
 		end
 		
-		local infotext =  "Claycrafter " .. active .. "(Dirt: " .. item_state .. "; H2O: " .. fuel_state .. ")"
+		local infotext =  "Claycrafter " .. active .. "(Dirt: " .. item_state .. "; Water: " .. fuel_state .. ")"
 		
 		--
 		-- Set meta values
