@@ -1,4 +1,3 @@
-
 --
 -- Formspecs
 --
@@ -61,7 +60,6 @@ local function allow_metadata_inventory_put(pos, listname, index, stack, player)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
 	if listname == "fuel" then -- "Water"
-		--if minetest.get_craft_result({method="fuel", width=1, items={stack}}).time ~= 0 then
 		if minetest.get_item_group(stack:get_name(), "h2o") > 0 then
 			if inv:is_empty("src") then
 				meta:set_string("infotext", "Claycrafter is empty")
@@ -112,7 +110,7 @@ minetest.register_node("claycrafter:claycrafter", {
 	
 	allow_metadata_inventory_put = allow_metadata_inventory_put,
 	allow_metadata_inventory_move = allow_metadata_inventory_move,
-	allow_metadata_inventory_take = allow_metadata_inventory_take,
+	allow_metadata_inventory_take = allow_metadata_inventory_take
 })
 
 minetest.register_node("claycrafter:claycrafter_active", {
@@ -129,7 +127,7 @@ minetest.register_node("claycrafter:claycrafter_active", {
 				aspect_w = 16,
 				aspect_h = 16,
 				length = 1.5
-			},
+			}
 		}
 	},
 	paramtype2 = "facedir",
@@ -144,7 +142,7 @@ minetest.register_node("claycrafter:claycrafter_active", {
 	
 	allow_metadata_inventory_put = allow_metadata_inventory_put,
 	allow_metadata_inventory_move = allow_metadata_inventory_move,
-	allow_metadata_inventory_take = allow_metadata_inventory_take,
+	allow_metadata_inventory_take = allow_metadata_inventory_take
 })
 
 --
@@ -194,29 +192,11 @@ minetest.register_abm({
 		-- Cooking
 		--
 	
-		--[[	
-		-- Check if we have cookable content
-		--local cooked, aftercooked = minetest.get_craft_result({method = "cooking", width = 1, items = srclist})
-		local cooked, aftercooked = minetest.get_item_group(inv:get_stack("src", 1):get_name(), "h2o")
-		local cookable = true
-		print(inv:get_stack("fuel", 1):get_name())
-		print(cooked)
-		
-		--if cooked.time == 0 then
-		if cooked == 0 then
-			cookable = false
-		end
-		--]]
-		local cooked, aftercooked
 		local cooktime = minetest.get_item_group(inv:get_stack("fuel", 1):get_name(), "h2o")
-		--print("cooktime: " .. cooktime)
 		local cookable = true
-		--print(inv:get_stack("src", 1):get_name())
 		if inv:get_stack("src", 1):get_name() ~= "claycrafter:compressed_dirt" then
 			cookable = false
 		end
-		--print(tostring(cookable))
-		
 		
 		-- Check if we have enough fuel to burn
 		if fuel_time < fuel_totaltime then
@@ -226,26 +206,22 @@ minetest.register_abm({
 			-- If there is a cookable item then check if it is ready yet
 			if cookable then
 				src_time = src_time + 1
-				--print("src_time: " .. src_time)
-				if src_time >= cooktime then --cooked.time then
+				if src_time >= cooktime then
 					-- Place result in dst list if possible
-					--if inv:room_for_item("dst", ItemStack({name = "default:clay 4"})) then --cooked.item) then
-						inv:add_item("dst", {name = "default:clay", count = 4}) --cooked.item)
-						--inv:set_stack("src", 1, aftercooked.items[1])
+					if inv:room_for_item("dst", ItemStack({name = "default:clay", count = 4})) then
+						print("Apparently, there's room.")
+						inv:add_item("dst", {name = "default:clay", count = 4})
 						inv:remove_item("src", inv:get_stack("src", 1):get_name())
 						src_time = 0
-					--end
+					end
 				end
 			end
 		else
 			-- Furnace ran out of fuel
 			if cookable then
 				-- We need to get new fuel
-				--local fuel, afterfuel = minetest.get_craft_result({method = "fuel", width = 1, items = fuellist})
 				local fueltime = minetest.get_item_group(inv:get_stack("fuel", 1):get_name(), "h2o")
-				--print("fueltime var is: " .. fueltime)
 				
-				--if fuel.time == 0 then
 				if fueltime == 0 then
 					-- No valid fuel in fuel list
 					fuel_totaltime = 0
@@ -254,15 +230,11 @@ minetest.register_abm({
 				else
 					-- Take fuel from fuel list
 
-					inv:remove_item("fuel", inv:get_stack("fuel", 1):get_name())
-					inv:add_item("fuel", inv:add_item("dst", {name = "vessels:drinking_glass"}))
+					if inv:room_for_item("dst", ItemStack({name = "vessels:drinking_glass"})) then
+						inv:remove_item("fuel", inv:get_stack("fuel", 1):get_name())
+						inv:add_item("dst", {name = "vessels:drinking_glass"})
+					end
 
-					--inv:set_stack("fuel", 1, afterfuel.items[1])
-					--inv:add_item("fuel", 1, ItemStack({name = "vessels:drinking_glass"}))
-					--print("rund out?")
-					--inv:get_stack("fuel", 1):take_item()
-					
-					
 					fuel_totaltime = fueltime
 					fuel_time = 0
 					
@@ -282,13 +254,13 @@ minetest.register_abm({
 		local item_state = ""
 		local item_percent = 0
 		if cookable then
-			item_percent =  math.floor(src_time / cooktime * 100) --cooked.time * 100)
+			item_percent =  math.floor(src_time / cooktime * 100)
 			item_state = item_percent .. "%"
 		else
 			if srclist[1]:is_empty() then
 				item_state = "Empty"
 			else
-				item_state = "Not cookable"
+				item_state = "No water"
 			end
 		end
 		
@@ -317,5 +289,5 @@ minetest.register_abm({
 		meta:set_float("src_time", src_time)
 		meta:set_string("formspec", formspec)
 		meta:set_string("infotext", infotext)
-	end,
+	end
 })
