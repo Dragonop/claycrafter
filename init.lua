@@ -15,12 +15,10 @@ minetest.register_craft({
 })
 
 --Glass of water
--- Water glasses, might should have stack_max = 1, change this if you preffer
 minetest.register_craftitem("claycrafter:glass_of_water", {
 		description = "Glass of Water",
 		inventory_image = "claycrafter_glass_of_water.png",
-		groups = {h2o = 1}, -- How much compressed dirt will turn to clay
-		--stack_max = 1
+		groups = {h2o = 1}, -- How much time to convert 1 compressed dirt to 4 clay
 })
 
 minetest.register_craft({
@@ -40,8 +38,9 @@ minetest.register_craft({
 		recipe = {
 			{"group:wood", "default:steel_ingot", "group:wood"},
 			{"group:wood", "default:glass", "group:wood"},
-			{"default:stick", "bucket:bucket_water", "default:stick"},
+			{"default:stick", "bucket:bucket_water", "default:stick"}
 		}
 })
+
 
 dofile(minetest.get_modpath("claycrafter") .. "/claycrafter.lua")
