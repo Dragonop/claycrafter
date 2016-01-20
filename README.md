@@ -2,16 +2,16 @@
 Minetest clay crafter mod. Adds a way to craft clay out of compressed dirt.
 
 Dependencies: 
--Default
--Vessels
--Bucket
+Default
+Vessels
+Bucket
 
 claycrafter.lua is derivated from furnace.lua (minetest_game) by PilzAdam and Amaz1. 
 Edited by everamzah to work for this mod.
 
 #####License for Code
 
-Copyright (C) 2010-2013 Dragonop <joaco-mono@hotmail.com>
+Copyright (C) 2016 Dragonop <joaco-mono@hotmail.com>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
