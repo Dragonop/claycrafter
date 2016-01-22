@@ -255,7 +255,7 @@ minetest.register_abm({
 		local item_percent = 0
 		if cookable then
 			item_percent =  math.floor(src_time / cooktime * 100)
-			item_state = item_percent .. "%"
+			item_state = "In use"
 		else
 			if srclist[1]:is_empty() then
 				item_state = "Empty"
@@ -269,12 +269,12 @@ minetest.register_abm({
 		if fuel_time <= fuel_totaltime and fuel_totaltime ~= 0 then
 			active = "active "
 			local fuel_percent = math.floor(fuel_time / fuel_totaltime * 100)
-			fuel_state = fuel_percent .. "%"
+			fuel_state = "In use"
 			formspec = active_formspec(fuel_percent, item_percent)
 			swap_node(pos, "claycrafter:claycrafter_active")
 		else
 			if not fuellist[1]:is_empty() then
-				fuel_state = "0%"
+				fuel_state = "Yes"
 			end
 			swap_node(pos, "claycrafter:claycrafter")
 		end
