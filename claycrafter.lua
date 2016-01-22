@@ -74,6 +74,8 @@ local function allow_metadata_inventory_put(pos, listname, index, stack, player)
 		return stack:get_count()
 	elseif listname == "dst" then
 		return 0
+	elseif listname == "vessels" then
+		return 0
 	end
 end
 
