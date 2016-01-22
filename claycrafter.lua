@@ -15,6 +15,7 @@ local function active_formspec(fuel_percent, item_percent)
 		"image[3.75,1.5;1,1;gui_claycrafter_arrow_bg.png^[lowpart:"..
 		(item_percent)..":gui_claycrafter_arrow_fg.png^[transformR270]"..
 		"list[current_name;dst;4.75,0.96;2,2;]"..
+		"list[current_name;vessels;1,1;2,2;]"..
 		"list[current_player;main;0,4.25;8,1;]"..
 		"list[current_player;main;0,5.5;8,3;8]"..
 		"listring[current_name;dst]"..
@@ -35,6 +36,7 @@ local inactive_formspec =
 	"image[2.75,1.5;1,1;claycrafter_claycrafter_water_bg.png]"..
 	"image[3.75,1.5;1,1;gui_claycrafter_arrow_bg.png^[transformR270]"..
 	"list[current_name;dst;4.75,0.96;2,2;]"..
+	"list[current_name;vessels;1,1;2,2;]"..
 	"list[current_player;main;0,4.25;8,1;]"..
 	"list[current_player;main;0,5.5;8,3;8]"..
 	"listring[current_name;dst]"..
@@ -179,6 +181,7 @@ minetest.register_abm({
 				src = 1,
 				fuel = 1,
 				dst = 4,
+				vessels = 4
 		}) do
 			if inv:get_size(listname) ~= size then
 				inv:set_size(listname, size)
