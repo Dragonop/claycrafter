@@ -1,10 +1,10 @@
---Compressed dirt
+-- Compressed dirt
 minetest.register_node("claycrafter:compressed_dirt", {
 		description = "Compressed Dirt",
 		tiles = {"claycrafter_compressed_dirt.png"},
 		groups = {crumbly = 1, oddly_breakable_by_hand = 1}
 })
-
+-- Crafts
 minetest.register_craft({
 		output = "claycrafter:compressed_dirt",
 		recipe = {
@@ -12,13 +12,6 @@ minetest.register_craft({
 			{"default:dirt", "default:dirt", "default:dirt"},
 			{"default:dirt", "default:dirt", "default:dirt"}
 		}
-})
-
---Glass of water
-minetest.register_craftitem("claycrafter:glass_of_water", {
-		description = "Glass of Water",
-		inventory_image = "claycrafter_glass_of_water.png",
-		groups = {h2o = 1, vessel = 1}, -- How much time to convert 1 compressed dirt to 4 clay
 })
 
 minetest.register_craft({
@@ -44,3 +37,4 @@ minetest.register_craft({
 
 
 dofile(minetest.get_modpath("claycrafter") .. "/claycrafter.lua")
+dofile(minetest.get_modpath("claycrafter") .. "/glass_of_water.lua")

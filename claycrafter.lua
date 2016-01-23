@@ -14,13 +14,15 @@ local function active_formspec(fuel_percent, item_percent)
 		(100-fuel_percent)..":claycrafter_claycrafter_water_fg.png]"..
 		"image[3.75,1.5;1,1;gui_claycrafter_arrow_bg.png^[lowpart:"..
 		(item_percent)..":gui_claycrafter_arrow_fg.png^[transformR270]"..
-		"list[current_name;dst;4.75,0.96;2,2;]"..
-		"list[current_name;vessels;1,1;2,2;]"..
+		"list[current_name;dst;4.75,0.96;3,2;]"..
+		"list[current_name;vessels;0,1.5;2,2;]"..
 		"list[current_player;main;0,4.25;8,1;]"..
 		"list[current_player;main;0,5.5;8,3;8]"..
 		"listring[current_name;dst]"..
 		"listring[current_player;main]"..
 		"listring[current_name;src]"..
+		"listring[current_player;main]"..
+		"listring[current_name;vessels]"..
 		"listring[current_player;main]"..
 		default.get_hotbar_bg(0, 4.25)
 	return formspec
@@ -35,13 +37,15 @@ local inactive_formspec =
 	"list[current_name;fuel;2.75,2.5;1,1;]"..
 	"image[2.75,1.5;1,1;claycrafter_claycrafter_water_bg.png]"..
 	"image[3.75,1.5;1,1;gui_claycrafter_arrow_bg.png^[transformR270]"..
-	"list[current_name;dst;4.75,0.96;2,2;]"..
-	"list[current_name;vessels;1,1;2,2;]"..
+	"list[current_name;dst;4.75,0.96;3,2;]"..
+	"list[current_name;vessels;0,1.5;2,2;]"..
 	"list[current_player;main;0,4.25;8,1;]"..
 	"list[current_player;main;0,5.5;8,3;8]"..
 	"listring[current_name;dst]"..
 	"listring[current_player;main]"..
 	"listring[current_name;src]"..
+	"listring[current_player;main]"..
+	"listring[current_name;vessels]"..
 	"listring[current_player;main]"..
 	default.get_hotbar_bg(0, 4.25)
 
@@ -52,7 +56,7 @@ local inactive_formspec =
 local function can_dig(pos, player)
 	local meta = minetest.get_meta(pos);
 	local inv = meta:get_inventory()
-	return inv:is_empty("fuel") and inv:is_empty("dst") and inv:is_empty("src")
+	return inv:is_empty("fuel") and inv:is_empty("dst") and inv:is_empty("src") and inv:is_empty("vessels")
 end
 
 local function allow_metadata_inventory_put(pos, listname, index, stack, player)
@@ -182,7 +186,7 @@ minetest.register_abm({
 		for listname, size in pairs({
 				src = 1,
 				fuel = 1,
-				dst = 4,
+				dst = 6,
 				vessels = 4
 		}) do
 			if inv:get_size(listname) ~= size then
@@ -213,11 +217,14 @@ minetest.register_abm({
 				src_time = src_time + 1
 				if src_time >= cooktime then
 					-- Place result in dst list if possible
-					if inv:room_for_item("dst", ItemStack({name = "default:clay", count = 4})) and inv:room_for_item("dst", ItemStack({name = "vessels:drinking_glass"})) then
-						print("Apparently, there's room.")
+					if inv:room_for_item("dst", ItemStack({name = "default:clay", count = 4}))
+					and inv:room_for_item("vessels", ItemStack({name = "vessels:drinking_glass"}))
+					then
 						inv:add_item("dst", {name = "default:clay", count = 4})
 						inv:remove_item("src", inv:get_stack("src", 1):get_name())
 						src_time = 0
+					else
+						swap_node(pos, "claycrafter:claycrafter")
 					end
 				end
 			end
@@ -235,9 +242,13 @@ minetest.register_abm({
 				else
 					-- Take fuel from fuel list
 
-					if inv:room_for_item("dst", ItemStack({name = "vessels:drinking_glass"})) and inv:room_for_item("dst", ItemStack({name = "default:clay", count = 4})) then
+					if inv:room_for_item("dst", ItemStack({name = "default:clay", count = 4}))
+					and inv:room_for_item("vessels", ItemStack({name = "vessels:drinking_glass"}))
+					then
 						inv:remove_item("fuel", inv:get_stack("fuel", 1):get_name())
-						inv:add_item("dst", {name = "vessels:drinking_glass"})
+						inv:add_item("vessels", {name = "vessels:drinking_glass"})
+					else 
+						swap_node(pos, "claycrafter:claycrafter_active")
 					end
 
 					fuel_totaltime = fueltime
@@ -285,7 +296,7 @@ minetest.register_abm({
 		end
 		
 		local infotext =  "Claycrafter " .. active .. "(Dirt: " .. item_state .. "; Water: " .. fuel_state .. ")"
-		
+
 		--
 		-- Set meta values
 		--
