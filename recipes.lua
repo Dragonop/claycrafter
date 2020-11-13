@@ -8,6 +8,11 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+		output = "default:dirt 9",
+		recipe = {{"claycrafter:compressed_dirt"}}
+})
+
+minetest.register_craft({
 		output = "claycrafter:glass_of_water 8",
 		recipe = {
 			{"vessels:drinking_glass", "vessels:drinking_glass", "vessels:drinking_glass"},
