@@ -230,7 +230,7 @@ minetest.register_abm({
 			end
 		else
 			-- Furnace ran out of fuel
-			if cookable then
+			if cookable and inv:room_for_item("dst", ItemStack({name = "default:clay", count = 4})) then
 				-- We need to get new fuel
 				local fueltime = minetest.get_item_group(inv:get_stack("fuel", 1):get_name(), "h2o")
 				
@@ -241,16 +241,13 @@ minetest.register_abm({
 					src_time = 0
 				else
 					-- Take fuel from fuel list
-
-					if inv:room_for_item("dst", ItemStack({name = "default:clay", count = 4}))
-					and inv:room_for_item("vessels", ItemStack({name = "vessels:drinking_glass"}))
+					if inv:room_for_item("vessels", ItemStack({name = "vessels:drinking_glass"}))
 					then
 						inv:remove_item("fuel", inv:get_stack("fuel", 1):get_name())
 						inv:add_item("vessels", {name = "vessels:drinking_glass"})
 					else 
 						swap_node(pos, "claycrafter:claycrafter_active")
 					end
-
 					fuel_totaltime = fueltime
 					fuel_time = 0
 					
