@@ -1,3 +1,0 @@
-vessels
-default
-bucket
