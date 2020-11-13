@@ -271,7 +271,7 @@ minetest.register_abm({
 		local item_percent = 0
 		if cookable then
 			item_percent =  math.floor(src_time / cooktime * 100)
-			item_state = "In use"
+			item_state = "Yes"
 		else
 			if srclist[1]:is_empty() then
 				item_state = "Empty"
