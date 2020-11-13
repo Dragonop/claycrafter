@@ -1,1 +1,0 @@
-This mod introduces the Claycrafter, which converts Compressed Dirt to Clay using Glasses of Water.
