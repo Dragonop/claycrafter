@@ -2,26 +2,26 @@
 Minetest clay crafter mod. 
 Adds a way for players to obtain clay other than mining, out of a common material: dirt. It adds three new nodes:
 
-Claycrafter: Used to convert compressed dirt into clay.
+ Claycrafter: Used to convert compressed dirt into clay.
 
-Compressed dirt: Just 9 dirt, compressed, useful for saving storage space, too! (Not present if moreblocks is installed, use moreblocks:dirt_compressed instead)
+ Compressed dirt: Just 9 dirt, compressed, useful for saving storage space, too! (Not present if moreblocks is installed, use moreblocks:dirt_compressed instead)
 
-Glass of water: Used as fuel for the Claycrafter. Placeable.
+ Glass of water: Used as fuel for the Claycrafter. Placeable.
 
-#####Dependencies:
+##### Dependencies:
 Default
 Vessels
 
-#####Optional dependencies:
+##### Optional dependencies:
 moreblocks
 
 Special thanks to everamzah
 
-#####License for Code 
+##### License for Code 
 
 Dragonop (LGPLv3)
 
-#####License for Media
+##### License for Media
 
 Textures created or modified by Dragonop (CC-BY-SA 4.0)
 
