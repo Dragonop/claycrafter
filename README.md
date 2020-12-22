@@ -8,13 +8,11 @@ Compressed dirt: Just 9 dirt, compressed, useful for saving storage space, too! 
 
 Glass of water: Used as fuel for the Claycrafter. Placeable.
 
-Ratings and Reviews
-
-Dependencies:
+#####Dependencies:
 Default
 Vessels
 
-Optional dependencies:
+#####Optional dependencies:
 moreblocks
 
 Special thanks to everamzah
