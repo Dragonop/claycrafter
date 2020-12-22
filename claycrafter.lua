@@ -203,8 +203,16 @@ minetest.register_abm({
 	
 		local cooktime = minetest.get_item_group(inv:get_stack("fuel", 1):get_name(), "h2o")
 		local cookable = true
-		if inv:get_stack("src", 1):get_name() ~= "claycrafter:compressed_dirt" then
-			cookable = false
+		
+		
+		if minetest.get_modpath("moreblocks") ~= nil then
+			if inv:get_stack("src", 1):get_name() ~= "moreblocks:dirt_compressed" then
+				cookable = false
+			end
+		else
+			if inv:get_stack("src", 1):get_name() ~= "claycrafter:compressed_dirt" then
+				cookable = false
+			end
 		end
 		
 		-- Check if we have enough fuel to burn

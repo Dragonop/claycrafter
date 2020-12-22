@@ -1,9 +1,31 @@
-minetest.register_node("claycrafter:compressed_dirt", {
+--compressed dirt
+local moreblocks = minetest.get_modpath("moreblocks")
+
+if moreblocks ~= nil then
+	minetest.register_alias("claycrafter:compressed_dirt","moreblocks:dirt_compressed")
+else
+	minetest.register_craft({
+			output = "claycrafter:compressed_dirt",
+			recipe = {
+				{"default:dirt", "default:dirt", "default:dirt"},
+				{"default:dirt", "default:dirt", "default:dirt"},
+				{"default:dirt", "default:dirt", "default:dirt"}
+			}
+	})
+	minetest.register_node("claycrafter:compressed_dirt", {
 		description = "Compressed Dirt",
 		tiles = {"claycrafter_compressed_dirt.png"},
-		groups = {crumbly = 1, oddly_breakable_by_hand = 1, soil = 1, cracky =1}
-})
+		groups = {crumbly = 1, oddly_breakable_by_hand = 1, soil = 1, cracky =1},
+		sounds = default.node_sound_dirt_defaults(),
+	})
+	minetest.register_craft({
+		output = "default:dirt 9",
+		recipe = {{"claycrafter:compressed_dirt"}}
+	})
+	minetest.register_alias("moreblocks:dirt_compressed","claycrafter:compressed_dirt")
+end
 
+--nodes
 minetest.register_node("claycrafter:glass_of_water", {
 	description = ("Glass of Water"),
 	drawtype = "plantlike",
@@ -18,4 +40,26 @@ minetest.register_node("claycrafter:glass_of_water", {
 	groups = {vessel = 1, dig_immediate = 3, attached_node = 1, h2o = 3}, -- How much time to convert 1 compressed dirt to 4 clay
 	on_use = minetest.item_eat(0,"vessels:drinking_glass"),	
 	sounds = default.node_sound_glass_defaults(),
+})
+
+--recipes
+minetest.register_craft({
+		output = "claycrafter:glass_of_water 8",
+		recipe = {
+			{"vessels:drinking_glass", "vessels:drinking_glass", "vessels:drinking_glass"},
+			{"vessels:drinking_glass", "bucket:bucket_water", "vessels:drinking_glass"}, 
+			{"vessels:drinking_glass", "vessels:drinking_glass", "vessels:drinking_glass"}
+		},
+		replacements = {
+			{"bucket:bucket_water", "bucket:bucket_empty"},
+		}
+})
+
+minetest.register_craft({
+		output = "claycrafter:claycrafter",
+		recipe = {
+			{"group:wood", "default:steel_ingot", "group:wood"},
+			{"group:wood", "default:glass", "group:wood"},
+			{"default:stick", "bucket:bucket_water", "default:stick"}
+		}
 })
