@@ -1,13 +1,23 @@
 # claycrafter
-Minetest clay crafter mod. Adds a way to craft clay out of compressed dirt.
+Minetest clay crafter mod. 
+Adds a way for players to obtain clay other than mining, out of a common material: dirt. It adds three new nodes:
+
+Claycrafter: Used to convert compressed dirt into clay.
+
+Compressed dirt: Just 9 dirt, compressed, useful for saving storage space, too! (Not present if moreblocks is installed, use moreblocks:dirt_compressed instead)
+
+Glass of water: Used as fuel for the Claycrafter. Placeable.
+
+Ratings and Reviews
 
 Dependencies:
 Default
 Vessels
-Bucket
 
-claycrafter.lua is derivated from furnace.lua (minetest_game) by PilzAdam and Amaz1. 
-Edited by everamzah to work for this mod.
+Optional dependencies:
+moreblocks
+
+Special thanks to everamzah
 
 #####License for Code 
 
