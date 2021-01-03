@@ -33,6 +33,7 @@ minetest.register_node("claycrafter:glass_of_water", {
 	inventory_image = "claycrafter_glass_of_water_inv.png",
 	wield_image = "claycrafter_glass_of_water.png",
 	paramtype = "light",
+	use_texture_alpha = true,
 	is_ground_content = false,
 	walkable = false,
 	sunlight_propagates = true,
