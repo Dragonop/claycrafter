@@ -7,9 +7,9 @@ else
 	minetest.register_craft({
 			output = "claycrafter:compressed_dirt",
 			recipe = {
-				{"default:dirt", "default:dirt", "default:dirt"},
-				{"default:dirt", "default:dirt", "default:dirt"},
-				{"default:dirt", "default:dirt", "default:dirt"}
+				{"group:dirt", "group:dirt", "group:dirt"},
+				{"group:dirt", "group:dirt", "group:dirt"},
+				{"group:dirt", "group:dirt", "group:dirt"}
 			}
 	})
 	minetest.register_node("claycrafter:compressed_dirt", {
@@ -47,12 +47,24 @@ minetest.register_node("claycrafter:glass_of_water", {
 minetest.register_craft({
 		output = "claycrafter:glass_of_water 8",
 		recipe = {
-			{"vessels:drinking_glass", "vessels:drinking_glass", "vessels:drinking_glass"},
-			{"vessels:drinking_glass", "bucket:bucket_water", "vessels:drinking_glass"}, 
-			{"vessels:drinking_glass", "vessels:drinking_glass", "vessels:drinking_glass"}
+			{"group:vessel", "group:vessel", "group:vessel"},
+			{"group:vessel", "group:water_bucket", "group:vessel"},
+			{"group:vessel", "group:vessel", "group:vessel"}
 		},
 		replacements = {
-			{"bucket:bucket_water", "bucket:bucket_empty"},
+			{"group:water_bucket", "bucket:bucket_empty"},
+		}
+})
+
+minetest.register_craft({
+		output = "claycrafter:glass_of_water 8",
+		recipe = {
+			{"group:vessel", "group:vessel", "group:vessel"},
+			{"group:vessel", "group:water", "group:vessel"},
+			{"group:vessel", "group:vessel", "group:vessel"}
+		},
+		replacements = {
+			{"group:water_bucket", "bucket:bucket_empty"},
 		}
 })
 
@@ -60,7 +72,7 @@ minetest.register_craft({
 		output = "claycrafter:claycrafter",
 		recipe = {
 			{"group:wood", "default:steel_ingot", "group:wood"},
-			{"group:wood", "default:glass", "group:wood"},
-			{"default:stick", "bucket:bucket_water", "default:stick"}
+			{"group:wood", "group:glass", "group:wood"},
+			{"group:stick", "group:water_bucket", "group:stick"}
 		}
 })
