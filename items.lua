@@ -62,9 +62,6 @@ minetest.register_craft({
 			{"group:vessel", "group:vessel", "group:vessel"},
 			{"group:vessel", "group:water", "group:vessel"},
 			{"group:vessel", "group:vessel", "group:vessel"}
-		},
-		replacements = {
-			{"group:water_bucket", "bucket:bucket_empty"},
 		}
 })
 
