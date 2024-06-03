@@ -48,11 +48,22 @@ minetest.register_craft({
 		output = "claycrafter:glass_of_water 8",
 		recipe = {
 			{"vessels:drinking_glass", "vessels:drinking_glass", "vessels:drinking_glass"},
-			{"vessels:drinking_glass", "bucket:bucket_water", "vessels:drinking_glass"}, 
+			{"vessels:drinking_glass", "bucket:bucket_water", "vessels:drinking_glass"},
 			{"vessels:drinking_glass", "vessels:drinking_glass", "vessels:drinking_glass"}
 		},
 		replacements = {
 			{"bucket:bucket_water", "bucket:bucket_empty"},
+		}
+})
+minetest.register_craft({
+		output = "claycrafter:glass_of_water 8",
+		recipe = {
+			{"vessels:drinking_glass", "vessels:drinking_glass", "vessels:drinking_glass"},
+			{"vessels:drinking_glass", "bucket:bucket_river_water", "vessels:drinking_glass"},
+			{"vessels:drinking_glass", "vessels:drinking_glass", "vessels:drinking_glass"}
+		},
+		replacements = {
+			{"bucket:bucket_river_water", "bucket:bucket_empty"},
 		}
 })
 
